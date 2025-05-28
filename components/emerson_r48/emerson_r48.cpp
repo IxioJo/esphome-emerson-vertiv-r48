@@ -14,10 +14,12 @@ static const float EMR48_OUTPUT_VOLTAGE_MIN = 41.0;
 static const float EMR48_OUTPUT_VOLTAGE_MAX = 58.5;
 
 static const float EMR48_OUTPUT_CURRENT_RATED_VALUE = 62.5;
-static const float EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MIN = 10;
+// static const float EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MIN = 10;
+static const float EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MIN = 2;
 static const float EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MAX = 121;
 static const float EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE = 121;
-static const float EMR48_OUTPUT_CURRENT_MIN = 5.5; // 10%, rounded up to nearest 0.5A
+static const float EMR48_OUTPUT_CURRENT_MIN = 1; // 2%, rounded up to nearest 0.5A
+// static const float EMR48_OUTPUT_CURRENT_MIN = 5.5; // 10%, rounded up to nearest 0.5A
 static const float EMR48_OUTPUT_CURRENT_MAX = EMR48_OUTPUT_CURRENT_RATED_VALUE;
 
 static const uint32_t CAN_ID_REQUEST = 0x06000783;
