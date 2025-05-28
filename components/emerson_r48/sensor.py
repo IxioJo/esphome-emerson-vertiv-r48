@@ -107,7 +107,7 @@ CONFIG_SCHEMA = cv.All(
                 accuracy_decimals=2,
                 device_class=DEVICE_CLASS_CURRENT,
                 state_class=STATE_CLASS_MEASUREMENT,
-            ),
+            ).extend(cv.polling_component_schema("1s")),
             cv.Optional(CONF_MAX_OUTPUT_CURRENT): sensor.sensor_schema(
                 unit_of_measurement=UNIT_AMPERE,
                 icon=ICON_CURRENT_AC,
