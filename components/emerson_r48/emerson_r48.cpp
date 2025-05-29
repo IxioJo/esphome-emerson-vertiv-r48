@@ -146,7 +146,10 @@ void EmersonR48Component::update() {
     if (millis() - this->lastCtlSent_ > 10000) {
 
       this->lastCtlSent_ = millis();
-    }*/
+    }
+    
+    */
+  
  if (cnt == 2) { 
     cnt = 0; 
     // send control every 10 seconds
@@ -156,7 +159,7 @@ void EmersonR48Component::update() {
     if (millis() - this->lastCtlSent_ > 10000) {
 
       this->lastCtlSent_ = millis();
-  
+    }
   }
 
 
