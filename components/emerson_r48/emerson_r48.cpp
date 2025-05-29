@@ -428,7 +428,7 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
 
       default:
         // printf("Unknown parameter 0x%02X, 0x%04X\r\n",frame[1], value);
-        ESP_LOGV(TAG, "unknown parameter %d %f",data[3],conv_value);
+        ESP_LOGD(TAG, "unknown parameter %d %f",data[3],conv_value);
         break;
     }
   }
