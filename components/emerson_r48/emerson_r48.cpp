@@ -149,7 +149,7 @@ void EmersonR48Component::update() {
     
     */
   
- if (cnt == 10) { 
+ if (cnt == 6) { 
     cnt = 0; 
     // send control every 10 seconds
     uint8_t msgv = this->dcOff_ << 7 | this->fanFull_ << 4 | this->flashLed_ << 3 | this->acOff_ << 2 | 1;
@@ -163,7 +163,7 @@ void EmersonR48Component::update() {
 
 
   // no new value for 5* intervall -> set sensors to NAN)
-  if (millis() - lastUpdate_ > this->update_interval_ * 10 && cnt == 0) {
+  if (millis() - lastUpdate_ > this->update_interval_ * 20 && cnt == 0) {
     this->publish_sensor_state_(this->input_power_sensor_, NAN);
     this->publish_sensor_state_(this->input_voltage_sensor_, NAN);
     this->publish_sensor_state_(this->input_current_sensor_, NAN);
