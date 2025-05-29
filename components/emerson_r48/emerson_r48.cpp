@@ -111,8 +111,28 @@ void EmersonR48Component::update() {
 //    std::vector<uint8_t> data = {0x00, 0xF0, 0x00, 0x80, 0x46, 0xA5, 0x34, 0x00};
 //    this->canbus->send_data(CAN_ID_REQUEST, true, data);
 //  }
+  if (cnt == 6) {
+    ESP_LOGD(TAG, "Requesting supply voltage message");
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00};
+    this->canbus->send_data(CAN_ID_REQUEST, true, data);
+  }
+  if (cnt == 7) {
+    ESP_LOGD(TAG, "Requesting supply voltage message");
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00};
+    this->canbus->send_data(CAN_ID_REQUEST, true, data);
+  }
+  if (cnt == 8) {
+    ESP_LOGD(TAG, "Requesting supply voltage message");
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00};
+    this->canbus->send_data(CAN_ID_REQUEST, true, data);
+  }
+  if (cnt == 9) {
+    ESP_LOGD(TAG, "Requesting supply voltage message");
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x09, 0x00, 0x00, 0x00, 0x00};
+    this->canbus->send_data(CAN_ID_REQUEST, true, data);
+  }
 
-  if (cnt == 6) { 
+  if (cnt == 10) { 
     cnt = 0; 
     // send control every 10 seconds
     uint8_t msgv = this->dcOff_ << 7 | this->fanFull_ << 4 | this->flashLed_ << 3 | this->acOff_ << 2 | 1;
@@ -391,6 +411,7 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
 
       default:
         // printf("Unknown parameter 0x%02X, 0x%04X\r\n",frame[1], value);
+        ESP_LOGV(TAG, "unknown parameter %d %f",data[3],conv_value);
         break;
     }
   }
