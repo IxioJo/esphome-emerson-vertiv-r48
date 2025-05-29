@@ -389,7 +389,7 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
   // Log the entire line
   ESP_LOGD(TAG, "received can_message.data: %s", buffer);
 
-  if (can_id == CAN_ID_DATA) {
+  if (can_id == CAN_ID_DATA || can_id == CAN_ID_DATA ) {
     uint32_t value = (data[4] << 24) + (data[5] << 16) + (data[6] << 8) + data[7];
     float conv_value = 0;
     memcpy(&conv_value, &value, sizeof(conv_value));
