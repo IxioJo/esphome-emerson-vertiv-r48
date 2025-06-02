@@ -164,7 +164,7 @@ void EmersonR48Component::update() {
       this->lastCtlSent_ = millis();
     }
     
-    
+  }  
   /*
  if (cnt == 6) { 
     cnt = 0; 
