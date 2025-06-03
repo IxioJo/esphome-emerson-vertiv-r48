@@ -443,8 +443,11 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
 
       case EMR48_DATA_INPUT_FREQ:
         //conv_value = value / 1.0;
-        this->publish_sensor_state_(this->input_frequency_sensor_, conv_value);
-        ESP_LOGV(TAG, "Input Frequency: %f", conv_value);
+        if(conv_value >60.0)
+        {
+          this->publish_sensor_state_(this->input_frequency_sensor_, conv_value);
+          ESP_LOGV(TAG, "Input Frequency: %f", conv_value);
+        }
         break;
 
       case EMR48_DATA_INPUT_POWER:
@@ -473,8 +476,11 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
       
       case EMR48_DATA_INPUT_CURRENT:
         //conv_value = value / 1.0;
-        this->publish_sensor_state_(this->input_current_sensor_, conv_value);
-        ESP_LOGV(TAG, "Output Power: %f", conv_value);
+        if(conv_value>0.1)
+        {
+          this->publish_sensor_state_(this->input_current_sensor_, conv_value);
+          ESP_LOGV(TAG, "Output Power: %f", conv_value);
+        }
         
 
         this->lastUpdate_ = millis();
