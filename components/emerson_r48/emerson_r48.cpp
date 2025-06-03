@@ -129,7 +129,7 @@ void EmersonR48Component::update() {
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 7) {
-        float limit = 100.0 / 100.0f;
+        float limit = 30.0 / 100.0f;
         uint8_t byte_array[4];
         float_to_bytearray(limit, byte_array);
     ESP_LOGD(TAG, "Requesting supply input power message");
