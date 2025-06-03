@@ -38,12 +38,12 @@ static const uint8_t EMR48_DATA_OUTPUT_AL = 0x03;
 static const uint8_t EMR48_DATA_OUTPUT_T = 0x04;
 static const uint8_t EMR48_DATA_OUTPUT_IV = 0x05;
 
-static const uint8_t EMR48_DATA_INPUT_FREQ = 0x11;
-static const uint8_t EMR48_DATA_INPUT_POWER = 0x12;
-static const uint8_t EMR48_DATA_INPUT_TEMP = 0x13;
-static const uint8_t EMR48_DATA_EFFICIENCY = 0x14;
-static const uint8_t EMR48_DATA_INPUT_CURRENT = 0x15;
-static const uint8_t EMR48_DATA_OUTPUT_POWER = 0x16;
+static const uint8_t EMR48_DATA_INPUT_FREQ = 0x17;
+static const uint8_t EMR48_DATA_INPUT_POWER = 0x18;
+static const uint8_t EMR48_DATA_INPUT_TEMP = 0x19;
+static const uint8_t EMR48_DATA_EFFICIENCY = 0x20;
+static const uint8_t EMR48_DATA_INPUT_CURRENT = 0x21;
+static const uint8_t EMR48_DATA_OUTPUT_POWER = 0x22;
 
 
 
