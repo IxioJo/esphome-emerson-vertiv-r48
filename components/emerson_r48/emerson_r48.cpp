@@ -456,7 +456,7 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
       case EMR48_DATA_INPUT_TEMP:
         // conv_value = conv_value * 100.0;
         //this->publish_number_state_(this->max_output_current_number_, conv_value);
-        this->publish_sensor_state_(this->input_temp_sensor_, value_int);
+        this->publish_sensor_state_(this->input_temp_sensor_, conv_value);
         ESP_LOGV(TAG, "Input Temp: %f", conv_value);
         break;
 
@@ -469,6 +469,10 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
       case EMR48_DATA_OUTPUT_POWER:
         //conv_value = value / 1.0;
         this->publish_sensor_state_(this->output_power_sensor_, conv_value);
+        ESP_LOGV(TAG, "Output Power: %f", conv_value);
+      case EMR48_DATA_INPUT_CURRENT:
+        //conv_value = value / 1.0;
+        this->publish_sensor_state_(this->input_current_sensor_{, conv_value);
         ESP_LOGV(TAG, "Output Power: %f", conv_value);
         
 
