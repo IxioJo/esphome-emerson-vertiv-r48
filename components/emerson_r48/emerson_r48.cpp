@@ -125,7 +125,7 @@ void EmersonR48Component::update() {
 //  }
 
   if (cnt == 6) {
-    float limit = 60.0f / 100.0f;
+    float limit = 121.0f / 100.0f;
     uint8_t byte_array[4];
     uint32_t temp;
     memcpy(&temp, &limit, sizeof(temp));
