@@ -129,9 +129,16 @@ void EmersonR48Component::update() {
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 7) {
-        float limit = 30.0 / 100.0f;
-        uint8_t byte_array[4];
-        float_to_bytearray(limit, byte_array);
+    float limit = 30.0f / 100.0f;
+    uint8_t byte_array[4];
+    uint32_t temp;
+    memcpy(&temp, &limit, sizeof(temp));
+    byte_array[0] = (temp >> 24) & 0xFF; // Most significant byte
+    byte_array[1] = (temp >> 16) & 0xFF;
+    byte_array[2] = (temp >> 8) & 0xFF;
+    byte_array[3] = temp & 0xFF; // Least significant byte
+    
+    
     ESP_LOGD(TAG, "Requesting supply input power message");
     std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x22, byte_array[0], byte_array[1], byte_array[2], byte_array[3]};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
