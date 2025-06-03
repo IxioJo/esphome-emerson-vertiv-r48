@@ -136,7 +136,7 @@ void EmersonR48Component::update() {
     
     
     ESP_LOGD(TAG, "Requesting supply input power message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x19, byte_array[0], byte_array[1], byte_array[2], byte_array[3]};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x20, byte_array[0], byte_array[1], byte_array[2], byte_array[3]};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   /*
