@@ -42,8 +42,8 @@ static const uint8_t EMR48_DATA_INPUT_FREQ = 0x06;
 static const uint8_t EMR48_DATA_INPUT_POWER = 0x07;
 static const uint8_t EMR48_DATA_INPUT_TEMP = 0x08;
 static const uint8_t EMR48_DATA_EFFICIENCY = 0x09;
-static const uint8_t EMR48_DATA_INPUT_CURRENT = 0x10;
-static const uint8_t EMR48_DATA_OUTPUT_POWER = 0x11;
+static const uint8_t EMR48_DATA_INPUT_CURRENT = 0x0A;
+static const uint8_t EMR48_DATA_OUTPUT_POWER = 0x0B;
 
 
 
@@ -95,27 +95,27 @@ void EmersonR48Component::update() {
 */
   if (cnt == 1) {
     ESP_LOGD(TAG, "Requesting output voltage message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_OUTPUT_V, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 2) {
     ESP_LOGD(TAG, "Requesting output current message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_OUTPUT_A, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 3) {
     ESP_LOGD(TAG, "Requesting output current limit message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_OUTPUT_AL, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 4) {
     ESP_LOGD(TAG, "Requesting temperature (C) message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_OUTPUT_T, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 5) {
     ESP_LOGD(TAG, "Requesting supply voltage message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x05, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_OUTPUT_IV, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
 //  if (cnt == 6) {
@@ -125,32 +125,32 @@ void EmersonR48Component::update() {
 //  }
   if (cnt == 6) {
     ESP_LOGD(TAG, "Requesting supply input frequency message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_INPUT_FREQ, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 7) {
     ESP_LOGD(TAG, "Requesting supply input power message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_INPUT_POWER, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 8) {
     ESP_LOGD(TAG, "Requesting supply input temp message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_INPUT_TEMP, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 9) {
     ESP_LOGD(TAG, "Requesting supply efficiency message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x09, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_EFFICIENCY, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 10) {
     ESP_LOGD(TAG, "Requesting supply input current message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_INPUT_CURRENT, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 11) {
     ESP_LOGD(TAG, "Requesting supply output power message");
-    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x11, 0x00, 0x00, 0x00, 0x00};
+    std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_OUTPUT_POWER, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }
   if (cnt == 12) { 
@@ -408,6 +408,7 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
   if (can_id == CAN_ID_DATA || can_id == CAN_ID_DATA2 ) {
     uint32_t value = (data[4] << 24) + (data[5] << 16) + (data[6] << 8) + data[7];
     float conv_value = 0;
+    float value_int = (float) value;
     memcpy(&conv_value, &value, sizeof(conv_value));
     switch (data[3]) {
       case EMR48_DATA_OUTPUT_V:
@@ -453,9 +454,9 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
         break;
 
       case EMR48_DATA_INPUT_TEMP:
-        conv_value = conv_value * 100.0;
+        // conv_value = conv_value * 100.0;
         //this->publish_number_state_(this->max_output_current_number_, conv_value);
-        this->publish_sensor_state_(this->input_temp_sensor_, conv_value);
+        this->publish_sensor_state_(this->input_temp_sensor_, value_int);
         ESP_LOGV(TAG, "Input Temp: %f", conv_value);
         break;
 
