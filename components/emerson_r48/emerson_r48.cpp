@@ -170,6 +170,8 @@ void EmersonR48Component::update() {
 
       this->lastCtlSent_ = millis();
     }
+    this->sendSync();
+    this->gimme5();
     
   }  
   /*
