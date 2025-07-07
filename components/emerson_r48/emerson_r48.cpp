@@ -37,14 +37,14 @@ static const uint8_t EMR48_DATA_OUTPUT_A = 0x02;
 static const uint8_t EMR48_DATA_OUTPUT_AL = 0x03;
 static const uint8_t EMR48_DATA_OUTPUT_T = 0x04;
 static const uint8_t EMR48_DATA_OUTPUT_IV = 0x05;
-
+/*
 static const uint8_t EMR48_DATA_INPUT_FREQ = 0x17;
 static const uint8_t EMR48_DATA_INPUT_POWER = 0x18;
 static const uint8_t EMR48_DATA_INPUT_TEMP = 0x19;
 static const uint8_t EMR48_DATA_EFFICIENCY = 0x20;
 static const uint8_t EMR48_DATA_INPUT_CURRENT = 0x21;
 static const uint8_t EMR48_DATA_OUTPUT_POWER = 0x22;
-
+*/
 
 
 EmersonR48Component::EmersonR48Component(canbus::Canbus *canbus) { this->canbus = canbus; }
@@ -447,7 +447,10 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
         //conv_value = value / 1.0;
         this->publish_sensor_state_(this->input_voltage_sensor_, conv_value);
         ESP_LOGV(TAG, "Input voltage: %f", conv_value);
+        this->lastUpdate_ = millis();
+        break;
 
+/*
       case EMR48_DATA_INPUT_FREQ:
         //conv_value = value / 1.0;
         
@@ -488,10 +491,8 @@ void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_
         this->publish_sensor_state_(this->input_current_sensor_, conv_value);
         ESP_LOGV(TAG, "Output Power: %f", conv_value);
         
-        
+    */    
 
-        this->lastUpdate_ = millis();
-        break;
 
       default:
         // printf("Unknown parameter 0x%02X, 0x%04X\r\n",frame[1], value);
