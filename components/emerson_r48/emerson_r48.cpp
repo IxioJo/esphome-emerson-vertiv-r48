@@ -124,7 +124,7 @@ void EmersonR48Component::update() {
 //    this->canbus->send_data(CAN_ID_REQUEST, true, data);
 //  }
 
-  if (cnt == 6) {
+/*  if (cnt == 6) {
     float limit = 121.0f / 100.0f;
     uint8_t byte_array[4];
     uint32_t temp;
@@ -138,7 +138,7 @@ void EmersonR48Component::update() {
     ESP_LOGD(TAG, "Requesting supply input power message");
     std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x20, byte_array[0], byte_array[1], byte_array[2], byte_array[3]};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
-  }
+  }*/
   /*
   if (cnt == 8) {
     ESP_LOGD(TAG, "Requesting supply input temp message");
@@ -160,7 +160,7 @@ void EmersonR48Component::update() {
     std::vector<uint8_t> data = {0x01, 0xF0, 0x00, EMR48_DATA_OUTPUT_POWER, 0x00, 0x00, 0x00, 0x00};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
   }*/
-  if (cnt == 7) { 
+  if (cnt == 6) { 
     cnt = 0; 
     // send control every 10 seconds
     uint8_t msgv = this->dcOff_ << 7 | this->fanFull_ << 4 | this->flashLed_ << 3 | this->acOff_ << 2 | 1;
