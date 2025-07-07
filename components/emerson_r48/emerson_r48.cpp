@@ -187,7 +187,7 @@ void EmersonR48Component::update() {
 
 
   // no new value for 5* intervall -> set sensors to NAN)
-  if (millis() - lastUpdate_ > this->update_interval_ * 20 && cnt == 0) {
+  if (millis() - lastUpdate_ > this->update_interval_ * 200 && cnt == 0) {
     this->publish_sensor_state_(this->input_power_sensor_, NAN);
     this->publish_sensor_state_(this->input_voltage_sensor_, NAN);
     this->publish_sensor_state_(this->input_current_sensor_, NAN);
