@@ -185,7 +185,7 @@ void EmersonR48Component::update() {
     }
   }*/
 
-
+  /*
   // no new value for 5* intervall -> set sensors to NAN)
   if (millis() - lastUpdate_ > this->update_interval_ * 5 && cnt == 0) {
     this->publish_sensor_state_(this->input_power_sensor_, NAN);
@@ -202,7 +202,7 @@ void EmersonR48Component::update() {
 
     this->sendSync();
     this->gimme5();
-  }
+  }*/
 }
 
 // Function to convert float to byte array
