@@ -71,7 +71,7 @@ void EmersonR48Component::setup() {
 
   // catch all received messages
   canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
-  canbus_canbustrigger->set_component_source("canbus");
+  canbus_canbustrigger->set_component_source(LOG_STR("canbus"));
   App.register_component(canbus_canbustrigger);
   automation = new Automation<std::vector<uint8_t>, uint32_t, bool>(canbus_canbustrigger);
   auto cb = [=](std::vector<uint8_t> x, uint32_t can_id, bool remote_transmission_request) -> void {
