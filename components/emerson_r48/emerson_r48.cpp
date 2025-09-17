@@ -70,9 +70,12 @@ void EmersonR48Component::setup() {
   canbus::CanbusTrigger *canbus_canbustrigger;
 
   // catch all received messages
-  canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
+  //canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
+  // écouter toutes les trames Extended
+ canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0x00000000, 0xFFFFFFFF, true);
 
-  canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, filter);
+
+ 
 
   
   canbus_canbustrigger->set_component_source(LOG_STR("canbus"));
