@@ -70,7 +70,16 @@ void EmersonR48Component::setup() {
   canbus::CanbusTrigger *canbus_canbustrigger;
 
   // catch all received messages
-  canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
+  //  canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
+  
+  canbus::CanFilter filter{
+      .id = 0x00000000,     // match tout
+      .mask = 0x00000000,   // pas de masque
+      .extended = true      // extended frames
+  };
+  canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, filter);
+
+  
   canbus_canbustrigger->set_component_source(LOG_STR("canbus"));
   App.register_component(canbus_canbustrigger);
   automation = new Automation<std::vector<uint8_t>, uint32_t, bool>(canbus_canbustrigger);
