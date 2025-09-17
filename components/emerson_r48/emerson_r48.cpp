@@ -71,21 +71,21 @@ void EmersonR48Component::setup() {
 
   // catch all received messages
   //canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0, 0, true);
-  // écouter toutes les trames Extended
- canbus_canbustrigger = new canbus::CanbusTrigger(this->canbus, 0x00000000, 0xFFFFFFFF, true);
-
-
- 
-
+ // canbus_canbustrigger->set_component_source(LOG_STR("canbus"));
+// App.register_component(canbus_canbustrigger);
+//  automation = new Automation<std::vector<uint8_t>, uint32_t, bool>(canbus_canbustrigger);
+//  auto cb = [this](std::vector<uint8_t> x, uint32_t can_id, bool remote_transmission_request) -> void {
+//    this->on_frame(can_id, remote_transmission_request, x);
+//  };
+//  lambdaaction = new LambdaAction<std::vector<uint8_t>, uint32_t, bool>(cb);
+//  automation->add_actions({lambdaaction});
   
-  canbus_canbustrigger->set_component_source(LOG_STR("canbus"));
-  App.register_component(canbus_canbustrigger);
-  automation = new Automation<std::vector<uint8_t>, uint32_t, bool>(canbus_canbustrigger);
-  auto cb = [this](std::vector<uint8_t> x, uint32_t can_id, bool remote_transmission_request) -> void {
-    this->on_frame(can_id, remote_transmission_request, x);
-  };
-  lambdaaction = new LambdaAction<std::vector<uint8_t>, uint32_t, bool>(cb);
-  automation->add_actions({lambdaaction});
+    // enregistrer un callback global pour toutes les trames CAN
+  this->canbus->add_callback([this](uint32_t can_id, bool extended_id, bool rtr, const std::vector<uint8_t> &data) {
+    ESP_LOGV(TAG, "callback canbus id=0x%08X ext=%d rtr=%d size=%d", can_id, extended_id, rtr, (int)data.size());
+    this->on_frame(can_id, rtr, data);
+  });
+
 
   this->sendSync();
   this->gimme5();
@@ -406,7 +406,8 @@ void EmersonR48Component::set_control(uint8_t msgv) {
   ESP_LOGD(TAG, "sent control can_message.data: %s", buffer);
 }
 
-void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_t> &data) {
+// void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, std::vector<uint8_t> &data) {
+void EmersonR48Component::on_frame(uint32_t can_id, bool rtr, const std::vector<uint8_t> &data){
   // Create a buffer to hold the formatted string
   // Each byte is represented by two hex digits and a space, +1 for null terminator
   size_t length = data.size();
