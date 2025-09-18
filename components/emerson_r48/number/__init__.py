@@ -87,7 +87,7 @@ CONFIG_SCHEMA = cv.All(
                 }
             ),
         }
-    ).extend(cv.COMPONENT_SCHEMA)
+    ).extend(cv.component_schema)
 )
 
 
