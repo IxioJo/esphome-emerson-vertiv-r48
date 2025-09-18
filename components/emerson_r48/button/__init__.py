@@ -1,7 +1,8 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import button
-from esphome.const import CONF_ENTITY_CATEGORY, CONF_ID, EntityCategory
+from esphome.const import CONF_ENTITY_CATEGORY, CONF_ID
+from esphome.core import EntityCategory
 
 from .. import EmersonR48Component, emerson_r48_ns, CONF_EMERSON_R48_ID
 
