@@ -9,6 +9,7 @@ from esphome.const import (
     CONF_MODE,
     ENTITY_CATEGORY_CONFIG,
     ICON_FLASH,
+    ICON_EMPTY,
     ICON_CURRENT_AC,
     CONF_MIN_VALUE,
     CONF_MAX_VALUE,
