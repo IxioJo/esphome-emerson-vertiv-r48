@@ -12,15 +12,15 @@ from esphome.const import (
     CONF_MIN_VALUE,
     CONF_MAX_VALUE,
     CONF_STEP,
+    EntityCategory,
+    UnitOfMeasurement,
 )
-from esphome.core import UnitOfMeasurement, EntityCategory
 
 from .. import EmersonR48Component, emerson_r48_ns, CONF_EMERSON_R48_ID
 
 CONF_OUTPUT_VOLTAGE = "output_voltage"
 CONF_MAX_OUTPUT_CURRENT = "max_output_current"
 CONF_MAX_INPUT_CURRENT = "max_input_current"
-
 
 EmersonR48Number = emerson_r48_ns.class_(
     "EmersonR48Number", number.Number, cg.Component
