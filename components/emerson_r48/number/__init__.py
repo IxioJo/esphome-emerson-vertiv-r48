@@ -7,14 +7,14 @@ from esphome.const import (
     CONF_ICON,
     CONF_UNIT_OF_MEASUREMENT,
     CONF_MODE,
-    CONF_ENTITY_CATEGORY,
+    ENTITY_CATEGORY_CONFIG,
     ICON_FLASH,
     ICON_CURRENT_AC,
     CONF_MIN_VALUE,
     CONF_MAX_VALUE,
     CONF_STEP,
     UNIT_AMPERE,
-    ENTITY_CATEGORY_NONE,
+    
 )
 
 from .. import EmersonR48Component, emerson_r48_ns, CONF_EMERSON_R48_ID
@@ -28,11 +28,29 @@ EmersonR48Number = emerson_r48_ns.class_(
     "EmersonR48Number", number.Number, cg.Component
 )
 
+EMERSON_NUMBER_SCHEMA = (
+    number.number_schema(
+        EmersonR48Number,
+        icon=ICON_EMPTY,
+        entity_category=ENTITY_CATEGORY_CONFIG,
+        unit_of_measurement=UNIT_VOLT,
+    )
+    .extend(
+        {
+            cv.Optional(CONF_STEP, default=0.01): cv.float_,
+            cv.Optional(CONF_MODE, default="BOX"): cv.enum(
+                number.NUMBER_MODES, upper=True
+            ),
+        }
+    )
+    .extend(cv.COMPONENT_SCHEMA)
+)
+
 CONFIG_SCHEMA = cv.All(
     cv.Schema(
         {
             cv.GenerateID(CONF_EMERSON_R48_ID): cv.use_id(EmersonR48Component),
-            cv.Optional(CONF_OUTPUT_VOLTAGE): number.NUMBER_SCHEMA.extend(
+            cv.Optional(CONF_OUTPUT_VOLTAGE): EMERSON_NUMBER_SCHEMA.extend (
                 {
                     cv.GenerateID(): cv.declare_id(EmersonR48Number),
                     cv.Optional(CONF_MIN_VALUE, default=41): cv.float_,
@@ -50,7 +68,7 @@ CONFIG_SCHEMA = cv.All(
                     ): cv.entity_category,
                 }
             ),
-            cv.Optional(CONF_MAX_OUTPUT_CURRENT): number.NUMBER_SCHEMA.extend(
+            cv.Optional(CONF_MAX_OUTPUT_CURRENT): EMERSON_NUMBER_SCHEMA.extend(
                 {
                     cv.GenerateID(): cv.declare_id(EmersonR48Number),
                     cv.Optional(CONF_MIN_VALUE, default=2): cv.float_,
@@ -68,7 +86,7 @@ CONFIG_SCHEMA = cv.All(
                     ): cv.entity_category,
                 }
             ),
-            cv.Optional(CONF_MAX_INPUT_CURRENT): number.NUMBER_SCHEMA.extend(
+            cv.Optional(CONF_MAX_INPUT_CURRENT): EMERSON_NUMBER_SCHEMA.extend(
                 {
                     cv.GenerateID(): cv.declare_id(EmersonR48Number),
                     cv.Optional(CONF_MIN_VALUE, default=0): cv.float_,
