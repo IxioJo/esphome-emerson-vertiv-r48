@@ -7,8 +7,8 @@ from esphome.const import (
     CONF_ENTITY_CATEGORY,
     ICON_FLASH,
     ICON_CURRENT_AC,
+    EntityCategory,
 )
-from esphome.core import EntityCategory
 
 from .. import EmersonR48Component, emerson_r48_ns, CONF_EMERSON_R48_ID
 
@@ -60,7 +60,6 @@ CONFIG_SCHEMA = cv.All(
         }
     ).extend(cv.COMPONENT_SCHEMA)
 )
-
 
 async def to_code(config):
     hub = await cg.get_variable(config[CONF_EMERSON_R48_ID])
