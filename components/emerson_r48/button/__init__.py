@@ -1,7 +1,8 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import button
-from esphome.const import CONF_ENTITY_CATEGORY, ENTITY_CATEGORY_CONFIG, CONF_ID
+from esphome.const import CONF_ENTITY_CATEGORY, CONF_ID
+from esphome.core import EntityCategory
 
 from .. import EmersonR48Component, emerson_r48_ns, CONF_EMERSON_R48_ID
 
@@ -15,13 +16,12 @@ CONFIG_SCHEMA = cv.All(
     cv.Schema(
         {
             cv.GenerateID(CONF_EMERSON_R48_ID): cv.use_id(EmersonR48Component),
-            cv.Optional(CONF_SET_OFFLINE_VALUES): button.BUTTON_SCHEMA.extend(
+            cv.Optional(CONF_SET_OFFLINE_VALUES): button.button_schema(EmersonR48Button).extend(
                 {
-                    cv.GenerateID(): cv.declare_id(EmersonR48Button),
                     cv.Optional(
-                        CONF_ENTITY_CATEGORY, default=ENTITY_CATEGORY_CONFIG
+                        CONF_ENTITY_CATEGORY, default=EntityCategory.CONFIG
                     ): cv.entity_category,
-                    cv.Required('name'): cv.string_strict
+                    cv.Required("name"): cv.string_strict,
                 }
             ),
         }
@@ -35,8 +35,5 @@ async def to_code(config):
         conf = config[CONF_SET_OFFLINE_VALUES]
         var = cg.new_Pvariable(conf[CONF_ID])
         await cg.register_component(var, conf)
-        await button.register_button(
-            var,
-            conf,
-        )
+        await button.register_button(var, conf)
         cg.add(var.set_parent(hub))
