@@ -64,9 +64,7 @@ CONFIG_SCHEMA = cv.All(
                     cv.Optional(CONF_MODE, default="BOX"): cv.enum(
                         number.NUMBER_MODES, upper=True
                     ),
-                    cv.Optional(
-                        CONF_ENTITY_CATEGORY, default=ENTITY_CATEGORY_NONE
-                    ): cv.entity_category,
+
                 }
             ),
             cv.Optional(CONF_MAX_OUTPUT_CURRENT): EMERSON_NUMBER_SCHEMA.extend(
@@ -82,9 +80,7 @@ CONFIG_SCHEMA = cv.All(
                     cv.Optional(CONF_MODE, default="BOX"): cv.enum(
                         number.NUMBER_MODES, upper=True
                     ),
-                    cv.Optional(
-                        CONF_ENTITY_CATEGORY, default=ENTITY_CATEGORY_NONE
-                    ): cv.entity_category,
+
                 }
             ),
             cv.Optional(CONF_MAX_INPUT_CURRENT): EMERSON_NUMBER_SCHEMA.extend(
@@ -100,9 +96,7 @@ CONFIG_SCHEMA = cv.All(
                     cv.Optional(CONF_MODE, default="BOX"): cv.enum(
                         number.NUMBER_MODES, upper=True
                     ),
-                    cv.Optional(
-                        CONF_ENTITY_CATEGORY, default=ENTITY_CATEGORY_NONE
-                    ): cv.entity_category,
+
                 }
             ),
         }
