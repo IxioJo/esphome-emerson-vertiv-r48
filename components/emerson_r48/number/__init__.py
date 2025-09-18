@@ -12,9 +12,11 @@ from esphome.const import (
     CONF_MIN_VALUE,
     CONF_MAX_VALUE,
     CONF_STEP,
-    EntityCategory,
+   
+
     UnitOfMeasurement,
 )
+from esphome.core import EntityCategory
 
 from .. import EmersonR48Component, emerson_r48_ns, CONF_EMERSON_R48_ID
 
