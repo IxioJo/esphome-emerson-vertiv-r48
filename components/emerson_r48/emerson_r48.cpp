@@ -131,7 +131,7 @@ void EmersonR48Component::update() {
 //    this->canbus->send_data(CAN_ID_REQUEST, true, data);
 //  }
 
-  if (cnt == 6) {
+/*  if (cnt == 6) {
     float limit = 40.0f / 100.0f;
     uint8_t byte_array[4];
     uint32_t temp;
@@ -145,7 +145,7 @@ void EmersonR48Component::update() {
     ESP_LOGD(TAG, "applying maximum current value");
     std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x20, byte_array[0], byte_array[1], byte_array[2], byte_array[3]};
     this->canbus->send_data(CAN_ID_REQUEST, true, data);
-  }/**/
+  }*/
   /*
   if (cnt == 8) {
     ESP_LOGD(TAG, "Requesting supply input temp message");
