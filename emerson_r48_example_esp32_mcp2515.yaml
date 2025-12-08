@@ -3,7 +3,7 @@ esphome:
   friendly_name: Emerson_Vertiv_R48
 
 external_components:
-  - source: github://kylevdm/esphome-emerson-vertiv-r48
+  - source: github://Kylevdm/esphome-emerson-vertiv-r48
     refresh: 0s
 
 esp32: 
@@ -28,6 +28,10 @@ ota:
 
 captive_portal:
 
+esp32_ble_tracker:  # Defaults work for WiFi
+bluetooth_proxy:
+  active: true
+
 #mqtt:
   #broker: !secret mqtt_host
   #username: !secret mqtt_v2l
@@ -35,6 +39,7 @@ captive_portal:
   #client_id: emerson_r48_3000e3_v2l
   #id: mqtt_client
   #topic_prefix: eh/emerson
+
 
 spi:
   - id: McpSpi
@@ -59,13 +64,13 @@ emerson_r48:
 sensor:
   - platform: emerson_r48
     output_voltage:
-      name: "Output voltage"
+      name: Output voltage
     output_current:
-      name: "Output current"
+      name: Output current
     output_temp:
-      name: "Temperature"
+      name: Temperature
     input_voltage:
-      name: "AC Voltage"
+      name: AC Voltage
     max_output_current:
       name: "DC Max Current"
       unit_of_measurement: "%"
