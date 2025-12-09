@@ -297,7 +297,8 @@ void EmersonR48Component::set_output_voltage(float value, bool offline) {
 
 // Function to set current percentage
 void EmersonR48Component::set_max_output_current(float value, bool offline) {
-
+    float limit;
+    uint8_t byte_array[4];
     if (value >= EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MIN && value <= EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MAX) {
 
 
@@ -317,8 +318,7 @@ void EmersonR48Component::set_max_output_current(float value, bool offline) {
           this->canbus->send_data(CAN_ID_REQUEST, true, data);
         }
       
-        float limit = value / 100.0f;
-        uint8_t byte_array[4];
+
         float_to_bytearray(limit, byte_array);
         
         uint8_t p = offline ? 0x19 : 0x22;
