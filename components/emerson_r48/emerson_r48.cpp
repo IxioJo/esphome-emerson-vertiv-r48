@@ -299,6 +299,24 @@ void EmersonR48Component::set_output_voltage(float value, bool offline) {
 void EmersonR48Component::set_max_output_current(float value, bool offline) {
 
     if (value >= EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MIN && value <= EMR48_OUTPUT_CURRENT_RATED_PERCENTAGE_MAX) {
+
+
+         // a current limit is applied sometimes on my unit, here the code to change it
+        if( offline==1)
+        {
+          limit = 40.0f / 100.0f;
+          
+          uint32_t temp;
+          memcpy(&temp, &limit, sizeof(temp));
+          byte_array[0] = (temp >> 24) & 0xFF; // Most significant byte
+          byte_array[1] = (temp >> 16) & 0xFF;
+          byte_array[2] = (temp >> 8) & 0xFF;
+          byte_array[3] = temp & 0xFF; // Least significant byte
+          ESP_LOGD(TAG, "applying maximum current value");
+          std::vector<uint8_t> data = {0x01, 0xF0, 0x00, 0x20, byte_array[0], byte_array[1], byte_array[2], byte_array[3]};
+          this->canbus->send_data(CAN_ID_REQUEST, true, data);
+        }
+      
         float limit = value / 100.0f;
         uint8_t byte_array[4];
         float_to_bytearray(limit, byte_array);
