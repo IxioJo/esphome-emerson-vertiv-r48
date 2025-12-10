@@ -54,9 +54,9 @@ CONFIG_SCHEMA = cv.All(
                 entity_category=ENTITY_CATEGORY_NONE,
             ).extend(
                 {
-                    cv.Optional(CONF_MIN_VALUE, default=10): cv.float_,
+                    cv.Optional(CONF_MIN_VALUE, default=2): cv.float_,
                     cv.Optional(CONF_MAX_VALUE, default=121): cv.float_,
-                    cv.Optional(CONF_STEP, default=1): cv.float_,
+                    cv.Optional(CONF_STEP, default=0.1): cv.float_,
                     cv.Optional(CONF_MODE, default="BOX"): cv.enum(
                         number.NUMBER_MODES, upper=True
                     ),
